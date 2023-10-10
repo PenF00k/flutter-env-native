@@ -3,21 +3,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  const MethodChannel channel = MethodChannel('penf00k.ru/env_native');
-
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  setUp(() {
-    channel.setMockMethodCallHandler((MethodCall methodCall) async {
-      return '42';
-    });
-  });
+  testWidgets('', (tester) async {
+    const channel = MethodChannel('penf00k.ru/env_native');
+    tester.binding.defaultBinaryMessenger
+        .setMockMethodCallHandler(channel, (methodCall) async => 42);
 
-  tearDown(() {
-    channel.setMockMethodCallHandler(null);
-  });
-
-  test('getPlatformVersion', () async {
-    expect(await EnvNative.getInt('test_int'), '42');
+    expect(await EnvNative.getInt('test_int'), 42);
   });
 }

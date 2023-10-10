@@ -45,5 +45,9 @@
 	<string>$(test_string)</string>
 	<key>test_int</key>
 	<string>$(test_int)</string>
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
 </dict>
 </plist>
