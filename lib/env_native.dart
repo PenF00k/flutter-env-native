@@ -1,10 +1,7 @@
-import 'dart:async';
-
 import 'package:flutter/services.dart';
 
 class EnvNative {
-  static const MethodChannel _channel =
-      MethodChannel('penf00k.ru/env_native');
+  static const MethodChannel _channel = MethodChannel('penf00k.ru/env_native');
 
   static Future<String?> getString(String key) =>
       _get<String>('getString', key);

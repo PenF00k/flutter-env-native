@@ -1,7 +1,5 @@
 package ru.penf00k.env_native
 
-import androidx.annotation.NonNull;
-
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
@@ -11,7 +9,8 @@ import io.flutter.plugin.common.PluginRegistry.Registrar
 import android.content.Context
 
 /** EnvNativePlugin */
-public class EnvNativePlugin : FlutterPlugin, MethodCallHandler {
+class EnvNativePlugin : FlutterPlugin, MethodCallHandler {
+
     private lateinit var channel: MethodChannel
     private lateinit var mContext: Context
 
@@ -23,24 +22,24 @@ public class EnvNativePlugin : FlutterPlugin, MethodCallHandler {
         }
     }
 
-    override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-        channel = MethodChannel(flutterPluginBinding.getFlutterEngine().getDartExecutor(), "penf00k.ru/env_native")
+    override fun onAttachedToEngine(flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
+        channel = MethodChannel(flutterPluginBinding.binaryMessenger, "penf00k.ru/env_native")
         mContext = flutterPluginBinding.getApplicationContext()
-        channel.setMethodCallHandler(this);
+        channel.setMethodCallHandler(this)
     }
 
-    override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
+    override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
         channel.setMethodCallHandler(null)
     }
 
-    override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
+
+    override fun onMethodCall(call: MethodCall, result: Result) {
         when (call.method) {
             "getString" -> getString(call, result)
             "getInt" -> getInt(call, result)
             else -> result.notImplemented()
         }
     }
-
 
     private fun getString(call: MethodCall, result: MethodChannel.Result) {
         get("string", call, result) { resId ->
@@ -54,7 +53,12 @@ public class EnvNativePlugin : FlutterPlugin, MethodCallHandler {
         }
     }
 
-    private fun <T> get(defType: String, call: MethodCall, result: MethodChannel.Result, getter: (resId: Int) -> T) {
+    private fun <T> get(
+        defType: String,
+        call: MethodCall,
+        result: MethodChannel.Result,
+        getter: (resId: Int) -> T
+    ) {
         val key = call.arguments<String>()
 
         val resId = mContext.resources.getIdentifier(key, defType, mContext.packageName)
