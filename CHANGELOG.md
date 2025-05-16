@@ -1,5 +1,9 @@
 ## 1.0.1
 
+* Removed legacy android method call
+
+## 1.0.1
+
 * Recreated plugin project to fix build issues
 
 ## 1.0.0
