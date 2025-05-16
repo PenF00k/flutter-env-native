@@ -1,6 +1,6 @@
 name: env_native
 description: A plugin to get native variables from Android resources and iOS configs
-version: 1.0.1
+version: 1.0.2
 homepage: https://github.com/PenF00k/flutter-env-native
 
 environment:
