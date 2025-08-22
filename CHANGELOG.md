@@ -1,3 +1,7 @@
+## 1.0.3
+
+* Added Mac OS support
+
 ## 1.0.2
 
 * Removed legacy android method call
