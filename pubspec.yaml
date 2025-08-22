@@ -24,3 +24,5 @@ flutter:
         pluginClass: EnvNativePlugin
       ios:
         pluginClass: EnvNativePlugin
+      macos:
+        pluginClass: EnvNativePlugin
